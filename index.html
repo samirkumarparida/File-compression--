@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Compression</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>File Compression</h2>
+    <input type="file" id="fileInput">
+    <button onclick="compressFile()">Compress File</button>
+    <p id="status"></p>
+
+    <script>
+        function compressFile() {
+            var fileInput = document.getElementById('fileInput');
+            var file = fileInput.files[0];
+
+            if (file) {
+                var fileName = file.name;
+                var fileSize = file.size;
+                var reader = new FileReader();
+
+                reader.onload = function() {
+                    var compressedFileContent = compress(reader.result);
+                    var compressedFileSize = compressedFileContent.length;
+
+                    var statusElement = document.getElementById('status');
+                    statusElement.textContent = 'Original File: ' + fileName + ' (' + fileSize + ' bytes)\n';
+                    statusElement.textContent += 'Compressed File: ' + fileName + '_compressed (' + compressedFileSize + ' bytes)';
+
+                    // Here, you can do something with the compressed file content,
+                    // such as download it or send it to a server.
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                alert('Please select a file to compress.');
+            }
+        }
+
+        // Function to compress the file content (This is just a placeholder)
+        function compress(fileContent) {
+            // This is a placeholder function. Actual compression algorithms need to be implemented here.
+            // For demonstration purposes, let's assume we are just returning the original file content.
+            return fileContent;
+        }
+    </script>
+</body>
+</html>
